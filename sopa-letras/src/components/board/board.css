@@ -3,7 +3,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 800px;
-    height: 800px;
+    width: 45vw;
+    height: 45vw;
     background-color: bisque;
+    border-radius: 10px;
 }
