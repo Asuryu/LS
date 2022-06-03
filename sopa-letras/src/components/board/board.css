@@ -7,4 +7,6 @@
     height: 45vw;
     background-color: bisque;
     border-radius: 10px;
+    min-width: 400px;
+    min-height: 400px;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./words.css";
-import { PALAVRAS } from "../../constants";
+import { PALAVRAS, COLOR_PALETTE } from "../../constants";
 
 function Words(props) {
     return (
@@ -8,7 +8,7 @@ function Words(props) {
             <ul className="words-list">
                 {PALAVRAS.map((word, index) => {
                     return (
-                        <li key={index} className="word" style={{color: generateRandomColor()}}>
+                        <li key={index} className="word" style={{color: COLOR_PALETTE[index]}}>
                             {word}
                         </li>
                     )
@@ -17,14 +17,5 @@ function Words(props) {
         </div>
     )
 }
-
-function generateRandomColor(){
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
 
 export default Words;
