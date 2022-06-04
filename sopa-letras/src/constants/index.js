@@ -9,7 +9,12 @@ export const PALAVRAS = [
     "html",
     "javascript",
     "css",
-    "svelte"
+    "svelte",
+    "electron",
+    "nuxt",
+    "gatsby",
+    "gridsome",
+    "next"
 ];
 
 export const COLOR_PALETTE = [
