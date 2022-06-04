@@ -19,6 +19,7 @@ function App() {
   const [selectedLevel, setSelectedLevel] = useState("0");
   const [words, setWords] = useState([])
   const [timer, setTimer] = useState(TIMEOUTGAME);
+  const [collectedLetters, setCollectedLetters] = useState([]);
 
   const handleGameStart = () => {
     if (gameStarted) {
@@ -36,21 +37,22 @@ function App() {
 
     var tabDim = 0;
     var numWords = 0;
+    var timeModifier = 0;
     switch (value) {
       case "1":
         tabDim = 8;
-        timeModifier = 0;
         numWords = 5;
+        timeModifier = 0;
         break;
       case "2":
         tabDim = 10;
-        timeModifier = 10;
         numWords = 8;
+        timeModifier = 10;
         break;
       case "3":
         tabDim = 12;
-        timeModifier = 20;
         numWords = 12;
+        timeModifier = 20;
         break;
       default:
         break;
@@ -63,11 +65,12 @@ function App() {
       wordsObjects.push({
         key: `${word}-${index}`,
         index: index,
-        id: word,
+        word: word,
       });
     });
     shuffleArray(wordsObjects);
     setWords(wordsObjects);
+    setTimer(TIMEOUTGAME + timeModifier);
   };
 
   useEffect(() => {
@@ -90,17 +93,13 @@ function App() {
         clearInterval(timerId);
       }
     }
-  }, [gameStarted, timer]);
+  }, [gameStarted]);
 
   return (
     <div>
       <h1 id="title">Sopinha de Letras</h1>
       <div id="background"></div>
       <div id="container">
-        <Timer 
-          timer={timer}
-          selectedLevel={selectedLevel}
-        />
         <ControlPanel
           gameStarted={gameStarted}
           onGameStart={handleGameStart}
@@ -112,6 +111,11 @@ function App() {
           selectedLevel={selectedLevel}
         />
         <Words words={words}></Words>
+        <Timer 
+          timer={timer}
+          gameStarted={gameStarted}
+          selectedLevel={selectedLevel}
+        />
       </div>
     </div>
   );

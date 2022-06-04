@@ -1,7 +1,9 @@
 .piece{
-    background-color: rgba(221, 188, 255, 0.862);
+    transition: 0.2s;
+    background-color: rgb(255, 163, 106);
     border-radius: 3px;    
-    border: 0.5px solid rgba(46, 46, 46, 0.266);
+    border: 0.5px solid rgb(210, 136, 90);
+    cursor: pointer;
 }
 
 .letter{
@@ -12,9 +14,15 @@
     left: 50%;
     top: 50%;
     line-height: 5px;
-    color: rgb(255, 255, 255);
+    color: white;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.5em;
     font-weight: bold;
+    user-select: none;
+}
+
+.piece:hover{
+    transition: 0.1s;
+    background-color: rgb(210, 136, 90);
 }

@@ -1,3 +1,13 @@
+@font-face {
+    font-family: NexaBold;
+    src: url("../../../public/fonts/Nexa\ Bold.otf");
+}
+
+@font-face {
+    font-family: NexaLight;
+    src: url("../../../public/fonts/Nexa\ Light.otf");
+}
+
 #control-panel{
     z-index: 2;
     position: absolute;
@@ -5,20 +15,20 @@
     left: 30px;
     transform: translate(0%, -50%);
     width: 230px;
-    height: 80vh;
-    background-color: rgba(27, 27, 27, 0.275);
+    height: 70vh;
+    background-color: rgba(47, 47, 47, 0.485);
     border-radius: 10px;
 }
 
 #startBtn{
     transition: 0.1s;
     position: absolute;
-    bottom: 30px;
+    bottom: 10px;
     left: 50%;
     transform: translate(-50%, 0%);
-    background-color: #719719;
+    background-color: #99c72e;
     color: white;
-    width: 140px;
+    width: calc(100% - 20px);
     height: 30px;
     border: none;
     font-weight: bold;
@@ -27,7 +37,7 @@
 }
 #startBtn:hover{
     transition: 0.3s;
-    background-color: #99c72e;
+    background-color: #719719;
 }
 #startBtn:disabled{
     transition: 0;
@@ -36,11 +46,156 @@
     cursor: default;
 }
 
+#stopBtn{
+    transition: 0.1s;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: #c72e2e;
+    color: white;
+    width: calc(100% - 20px);
+    width: 140px;
+    height: 30px;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#stopBtn:hover{
+    transition: 0.3s;
+    background-color: #971919;
+}
+
+#scoreboard{
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    text-align: center;
+    border-radius: 7px;
+    background-color: #4fadff;
+    width: calc(100% - 20px);
+    height: 145px;
+}
+#scoreboard h1{
+    position: absolute;
+    top: 13px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    font-family: NexaBold;
+}
+
+#scoreboard .score{
+    position: relative;
+    top: 45px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: calc(100% - 10px);
+    margin-bottom: 3px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #3e87c7;
+}
+#scoreboard .score h1{
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translate(0%, -50%);
+    font-weight: lighter;
+    font-size: 15px;
+    font-family: NexaLight;
+}
+
+/* select first child from scoreboard that has score class */
+#scoreboard .score#score-1 h1{
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translate(0%, -50%);
+    font-weight: lighter;
+    font-size: 15px;
+    font-family: NexaBold;
+}
+
 .form-group{
     position: absolute;
-    top: 50%;
+    top: 200px;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     border: none;
+    border-radius: 5px;
+    margin: 0;
+    padding: 5px;
+    background-color: #ff754f;
+    padding-top: 10px;
+}
+
+.form-group select {
+    background: white;
+    line-height: 1;
+    border: 0;
+    padding: 0;
+    border-radius: 5px;
+    text-align: center;
+    width: 200px;
+    height: 30px;
+    position: relative;
+    z-index: 10;
+    font-size: 0.8em;
+    margin-top: 7px;
+}
+.form-group option {
+    background: white;
+    line-height: 1;
+    border: 0;
+    padding: 0;
+    border-radius: 5px;
+    width: 200px;
+    height: 30px;
+    position: relative;
+    z-index: 10;
+    font-size: 0.8em;
+    margin-top: 7px;
+}
+.form-group label{
+    color: white;
+    padding-top: 10px;
+    font-size: 1.2em;
+    font-family: NexaBold;
+    font-weight: bold;
+}
+
+.extraWords{
+    position: absolute;
+    top: 333px;
+    left: 50%;
+    width: calc(100% - 20px);
+    height: 165px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    margin: 0;
+    background-color: #b64fff;
+    padding-top: 10px;
+}
+.extraWords h1{
+    position: absolute;
+    top: 13px;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, 0%);
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    font-family: NexaBold;
 }

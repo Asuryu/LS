@@ -5,7 +5,6 @@ import "./board.css";
 function Board(props) {
     var totalLetters;
     var gridClass;
-    console.log(props.selectedLevel)
     switch(props.selectedLevel){
         case "1":
             totalLetters = 8 * 8;
@@ -25,9 +24,11 @@ function Board(props) {
             break;
     }
 
+    let board = generateBoard(totalLetters);
+
     return (
         <div className={"board " + gridClass}>
-            {generateBoard(totalLetters).map((letter, index) => {
+            {board.map((letter) => {
                 return <Letter letter={letter} />
             })}
         </div>

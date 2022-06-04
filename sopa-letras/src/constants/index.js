@@ -18,8 +18,8 @@ export const PALAVRAS = [
 ];
 
 export const COLOR_PALETTE = [
-    "#FA897A", "#DE625D", "#F573A5", "#A46DDE", "#9C84F5", "#6D73DE", "#7BA3FA",
-    "#3FB2FA", "#3FC6FA", "#3FC6C6", "#3FA46D", "#3F9C84", "#3F6D73", "#3F7BA3"
+    "#ED9A00", "#E8840C", "#FF6500", "#E8440C", "#FF270D", "#E80C4E", "#FF00CA",
+    "#C40CE8", "#950DFF", "#0C46E8", "#0D8CFF", "#0CAEE8", "#0CE8AA", "#0DFF76"
 ]
 
 export const TIMEOUTGAME = 30;

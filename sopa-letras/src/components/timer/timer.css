@@ -1,17 +1,39 @@
+@font-face {
+    font-family: NexaBold;
+    src: url("../../../public/fonts/Nexa\ Bold.otf");
+}
+
+@font-face {
+    font-family: NexaLight;
+    src: url("../../../public/fonts/Nexa\ Light.otf");
+}
+
 .timer{
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
-    bottom: 25px;
+    bottom: 20px;
 }
 
 .timer i {
-    font-size: 1.2em;
+    font-size: 1.4em;
     text-align: center;
+}
+.timer spann{
+    font-size: 1.4em;
+    font-family: NexaBold;
+    color: #2e2e2e;
+}
+.timer span{
+    font-size: 1.4em;
+    font-family: NexaBold;
+}
+.timer-green{
+    color: rgb(95, 160, 49);
 }
 .timer-red{
     color: red;
 }
 .timer-yellow{
-    color: yellow;
+    color: rgb(255, 145, 0);
 }

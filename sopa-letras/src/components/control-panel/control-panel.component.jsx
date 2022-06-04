@@ -4,9 +4,17 @@ import "./control-panel.css";
 function ControlPanel(props) {
   return (
     <div id="control-panel">
+
+      <div id="scoreboard">
+        <h1>Scoreboard</h1>
+        <div class="score" id="score-1"><h1>1. Tomás Pinto (450)</h1></div>
+        <div class="score" id="score-2"><h1>2. Tomás Silva (320)</h1></div>
+        <div class="score" id="score-3"><h1>3. Professor (300)</h1></div>
+      </div>
+
       <form className="form">
         <fieldset className="form-group">
-          <label htmlFor="btLevel">Dificuldade: </label>
+          <label htmlFor="btLevel">Dificuldade</label>
           <select
             id="btLevel"
             defaultValue="0"
@@ -22,10 +30,15 @@ function ControlPanel(props) {
       </form>
       <button
           type="button"
-          id="startBtn"
+          id={props.gameStarted ? "stopBtn" : "startBtn"}
           disabled={props.selectedLevel === "0"}
           onClick={props.onGameStart}
       >{props.gameStarted ? "Parar o jogo" : "Começar o jogo!"}</button>
+
+      <div className="extraWords">
+        <h1>Palavras Extra</h1>
+      </div>
+
     </div>
   );
 }

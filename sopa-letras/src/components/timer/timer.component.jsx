@@ -9,6 +9,8 @@ function Timer(props) {
         timerClass = "timer-red";
     } else if(timer <= 20) {
         timerClass = "timer-yellow";
+    } else if (props.gameStarted){
+        timerClass = "timer-green";
     } else {
         timerClass = "";
     }
@@ -17,7 +19,7 @@ function Timer(props) {
 
     return (
         <div className="timer">
-            <i className="fa-solid fa-clock"> Tempo Restante: <span className={timerClass}>{timer}</span></i>
+            <i className={"fa-solid fa-clock " + timerClass}></i><spann> Tempo Restante: </spann><span className={timerClass}>{timer}</span>
         </div>
     )
 }

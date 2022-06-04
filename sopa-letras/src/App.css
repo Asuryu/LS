@@ -1,3 +1,7 @@
+*{
+    user-select: none;
+}
+
 #title{
     position: absolute;
     text-align: center;
@@ -9,6 +13,7 @@
     font-style: italic;
     font-weight: bold;
     color: #f77a44;
+    text-shadow: 2px 2px 0px #ffc8c8;
 }
 
 #background {
@@ -19,7 +24,7 @@
     height: 100%;
     background-color: #e5e5f7;
     opacity: 0.05;
-    background-image:  linear-gradient(135deg, #f77a44 25%, transparent 25%), linear-gradient(225deg, #f77a44 25%, transparent 25%), linear-gradient(45deg, #f77a44 25%, transparent 25%), linear-gradient(315deg, #f77a44 25%, #e5e5f7 25%);
+    background-image:  linear-gradient(135deg, #ffffff 25%, transparent 25%), linear-gradient(225deg, #f77a44 25%, transparent 25%), linear-gradient(45deg, #f77a44 25%, transparent 25%), linear-gradient(315deg, #f77a44 25%, #e5e5f7 25%);
     background-position:  10px 0, 10px 0, 0 0, 0 0;
     background-size: 20px 20px;
     background-repeat: repeat;
