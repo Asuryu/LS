@@ -1,15 +1,15 @@
 import React from "react";
 import "./words.css";
-import { PALAVRAS, COLOR_PALETTE } from "../../constants";
+import { COLOR_PALETTE } from "../../constants";
 
 function Words(props) {
     return (
         <div className="words">
             <ul className="words-list">
-                {PALAVRAS.map((word, index) => {
+                {props.words.map(word => {
                     return (
-                        <li key={index} className="word" style={{color: COLOR_PALETTE[index]}}>
-                            {word}
+                        <li key={word.id} className="word" style={{color: COLOR_PALETTE[word.index]}}>
+                            {word.name}
                         </li>
                     )
                 })}

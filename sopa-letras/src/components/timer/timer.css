@@ -1,5 +1,13 @@
+.timer{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    bottom: 25px;
+}
+
 .timer i {
     font-size: 1.2em;
+    text-align: center;
 }
 .timer-red{
     color: red;

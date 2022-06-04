@@ -3,17 +3,21 @@ import "./timer.css";
 
 function Timer(props) {
     var timerClass = "";
-    if(props.timer <= 10) {
+    var timer = props.timer;
+
+    if(timer <= 10) {
         timerClass = "timer-red";
-    } else if(props.timer <= 20) {
+    } else if(timer <= 20) {
         timerClass = "timer-yellow";
     } else {
         timerClass = "";
     }
 
+    if(props.selectedLevel === "0") timer = 0;
+
     return (
         <div className="timer">
-            <i class="fa-solid fa-clock"> Tempo Restante: <span className={timerClass}>{props.timer}</span></i>
+            <i className="fa-solid fa-clock"> Tempo Restante: <span className={timerClass}>{timer}</span></i>
         </div>
     )
 }

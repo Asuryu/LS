@@ -1,12 +1,26 @@
 .board {
     position: absolute;
+    display: grid;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 45vw;
-    height: 45vw;
-    background-color: bisque;
+    width: 80vh;
+    height: 80vh;
+    background-color: beige;
     border-radius: 10px;
     min-width: 400px;
     min-height: 400px;
+}
+
+.grid-8x8{
+    grid-template-columns: repeat(8, 0.5fr);
+    grid-template-rows: repeat(8, 0.5fr);
+}
+.grid-10x10{
+    grid-template-columns: repeat(10, 0.5fr);
+    grid-template-rows: repeat(10, 0.5fr);
+}
+.grid-12x12{
+    grid-template-columns: repeat(12, 0.5fr);
+    grid-template-rows: repeat(12, 0.5fr);
 }

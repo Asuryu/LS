@@ -1,0 +1,46 @@
+#control-panel{
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    transform: translate(0%, -50%);
+    width: 230px;
+    height: 80vh;
+    background-color: rgba(27, 27, 27, 0.275);
+    border-radius: 10px;
+}
+
+#startBtn{
+    transition: 0.1s;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: #719719;
+    color: white;
+    width: 140px;
+    height: 30px;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#startBtn:hover{
+    transition: 0.3s;
+    background-color: #99c72e;
+}
+#startBtn:disabled{
+    transition: 0;
+    background-color: #3e3e3e;
+    color: #868686;
+    cursor: default;
+}
+
+.form-group{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border: none;
+}

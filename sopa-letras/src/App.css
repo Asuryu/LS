@@ -1,3 +1,16 @@
+#title{
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    top: 3px;
+    transform: translate(-50%, 0%);
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    color: #f77a44;
+}
+
 #background {
     position: absolute;
     top: 0;
