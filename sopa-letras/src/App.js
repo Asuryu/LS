@@ -67,9 +67,7 @@ function App() {
       });
     });
     shuffleArray(wordsObjects);
-    console.log(wordsObjects)
     setWords(wordsObjects);
-    setTimer(TIMEOUTGAME);
   };
 
   useEffect(() => {
@@ -109,9 +107,10 @@ function App() {
           selectedLevel={selectedLevel}
           onLevelChange={handleLevelChange}
         />
-        <Board>
+        <Board
+          words={words}
           selectedLevel={selectedLevel}
-        </Board>
+        />
         <Words words={words}></Words>
       </div>
     </div>

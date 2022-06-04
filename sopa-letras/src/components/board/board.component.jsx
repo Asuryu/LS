@@ -5,6 +5,7 @@ import "./board.css";
 function Board(props) {
     var totalLetters;
     var gridClass;
+    console.log(props.selectedLevel)
     switch(props.selectedLevel){
         case "1":
             totalLetters = 8 * 8;
@@ -19,8 +20,8 @@ function Board(props) {
             gridClass = "grid-12x12";
             break;
         default:
-            totalLetters = 12 * 12;
-            gridClass = "grid-12x12";
+            totalLetters = 0;
+            gridClass = "";
             break;
     }
 
