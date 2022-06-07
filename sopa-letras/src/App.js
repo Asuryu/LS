@@ -22,6 +22,7 @@ function App() {
   const [words, setWords] = useState([])
   const [timer, setTimer] = useState(TIMEOUTGAME);
   const [board, setBoard] = useState([]);
+  const [extraWords, setExtraWords] = useState([]);
   // const [collectedLetters, setCollectedLetters] = useState([]);
 
   const handleGameStart = () => {
@@ -34,6 +35,16 @@ function App() {
     }
   };
 
+  const addWord = (event) => {
+    var inputvalue = document.getElementById("inputWord").value
+    extraWords.push({
+      key: `${inputvalue}-${words.length}`,
+      index: words.length,
+      word: inputvalue,
+    });
+    setExtraWords(extraWords);
+    console.log(extraWords);
+  }
   const handleLevelChange = (event) => {
     const {value} = event.currentTarget;
     setSelectedLevel(value);
@@ -101,6 +112,7 @@ function App() {
           onGameStart={handleGameStart}
           selectedLevel={selectedLevel}
           onLevelChange={handleLevelChange}
+          onAddWord={addWord}
         />
         <Board
           selectedLevel={selectedLevel}
