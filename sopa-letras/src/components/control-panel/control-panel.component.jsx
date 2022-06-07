@@ -22,9 +22,9 @@ function ControlPanel(props) {
             disabled={props.gameStarted}
           >
             <option value="0">Selecione uma dificuldade...</option>
-            <option value="1">Simples (8x8) - 5 palavras</option>
-            <option value="2">Intermédio (10x10) - 8 palavras</option>
-            <option value="3">Avançado (12x12) - 12 palavras</option>
+            <option value="1">Simples (10x10) - 4 palavras</option>
+            <option value="2">Intermédio (12x12) - 7 palavras</option>
+            <option value="3">Avançado (15x15) - 10 palavras</option>
           </select>
         </fieldset>
       </form>

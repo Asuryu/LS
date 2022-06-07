@@ -12,6 +12,8 @@ import shuffleArray from "./helpers/shuffleArray";
 
 var timerId = null;
 var tabDim = 0;
+var numWords = 0;
+var timeModifier = 0;
 
 function App() {
 
@@ -24,12 +26,9 @@ function App() {
 
   const handleGameStart = () => {
     if (gameStarted) {
-      console.log("Termina Jogo");
+      setBoard(generateBoard(tabDim));
       setGameStarted(false);
     } else {
-      console.log("Inicia Jogo");
-      var generatedBoard = generateBoard(tabDim);
-      setBoard(generatedBoard);
       placeWordsOnBoard(words);
       setGameStarted(true);
     }
@@ -39,44 +38,34 @@ function App() {
     const {value} = event.currentTarget;
     setSelectedLevel(value);
 
-    var numWords = 0;
-    var timeModifier = 0;
     switch (value) {
       case "1":
-        tabDim = 8;
-        numWords = 5;
+        tabDim = 10;
+        numWords = 4;
         timeModifier = 0;
         break;
       case "2":
-        tabDim = 10;
-        numWords = 8;
-        timeModifier = 10;
+        tabDim = 12;
+        numWords = 7;
+        timeModifier = 30;
         break;
       case "3":
-        tabDim = 12;
-        numWords = 12;
-        timeModifier = 20;
+        tabDim = 15;
+        numWords = 10;
+        timeModifier = 50;
         break;
       default:
+        tabDim = 0;
+        numWords = 0;
+        timeModifier = 0;
         break;
     }
 
-    const initialWords = shuffleArray(PALAVRAS);
-    const slicedInitialWords = initialWords.slice(0, numWords);
-    const wordsObjects = [];
-    slicedInitialWords.forEach((word, index) => {
-      wordsObjects.push({
-        key: `${word}-${index}`,
-        index: index,
-        word: word,
-      });
-    });
-    shuffleArray(wordsObjects);
-
+    
+    const wordsObjects = generateWords(numWords);
     setWords(wordsObjects);
     setTimer(TIMEOUTGAME + timeModifier);
-    var generatedBoard = generateBoard(tabDim);
-    setBoard(generatedBoard);
+    setBoard(generateBoard(tabDim));
   };
 
   useEffect(() => {
@@ -89,10 +78,11 @@ function App() {
         });
         if(nextTimer === 0){
           setGameStarted(false);
+          setBoard(generateBoard(tabDim));
         }
       }, 1000);
     } else if(timer !== TIMEOUTGAME){
-      setTimer(TIMEOUTGAME);
+      setTimer(TIMEOUTGAME + timeModifier);
     }
     return () => {
       if(timerId){
@@ -135,7 +125,9 @@ function App() {
         var randomX = Math.floor(Math.random() * tabDim);
         var randomY = Math.floor(Math.random() * tabDim);
         var randomDirection = Math.floor(Math.random() * 8);
+        //console.log("Try to place word: " + currentWord + " at position: " + randomX + "," + randomY + " in direction: " + randomDirection);
       } while (!placeWord(currentWord, wordLength, randomX, randomY, randomDirection));
+      //console.info("Word placed: " + currentWord + " at position: " + randomX + "," + randomY + " in direction: " + randomDirection);
     });
   }
   
@@ -144,66 +136,130 @@ function App() {
     var currentBoard = board;
     word = word.toUpperCase();
     switch (direction) {
-      case 0: // North to South
-        if(xPosition + wordLength <= board.length){
-          for(i = 0; i < wordLength; i++){
-            currentBoard[xPosition + i][yPosition] = word[i];
-          }
-          setBoard(currentBoard);
-          return true;
-        } else return false;
-      case 1: // East to West
+      case 0: // West to East
         if(yPosition + wordLength <= board.length){
           for(i = 0; i < wordLength; i++){
-            currentBoard[xPosition][yPosition + i] = word[i];
+            if(currentBoard[xPosition][yPosition + i] === "" || currentBoard[xPosition][yPosition + i] === word[i]){
+              currentBoard[xPosition][yPosition + i] = word[i];
+            } else {
+              for(var j = 0; j < i; j++){
+                currentBoard[xPosition][yPosition + j] = "";
+              }
+              setBoard(currentBoard);
+              return false;
+            };
           }
           setBoard(currentBoard);
           return true;
         } else return false;
-      case 2: // South to North
-        if(xPosition - wordLength >= 0){
+      case 1: // North to South
+        if(xPosition + wordLength <= board.length){
           for(i = 0; i < wordLength; i++){
-            currentBoard[xPosition - i][yPosition] = word[i];
+            if(currentBoard[xPosition + i][yPosition] === "" || currentBoard[xPosition + i][yPosition] === word[i]){
+              currentBoard[xPosition + i][yPosition] = word[i];
+            } else {
+              for(var j = 0; j < i; j++){
+                currentBoard[xPosition + j][yPosition] = "";
+              }
+              setBoard(currentBoard);
+              return false;
+            };
           }
           setBoard(currentBoard);
           return true;
         } else return false;
-      case 3: // West to East
-        if(yPosition - wordLength >= 0){
-          for(i = 0; i < wordLength; i++){
-            currentBoard[xPosition][yPosition - i] = word[i];
-          }
-          setBoard(currentBoard);
-          return true;
-        } else return false;
-      case 4: // North-East to South-West
-        if(xPosition + wordLength <= board.length && yPosition - wordLength >= 0){
-          for(i = 0; i < wordLength; i++){
-            currentBoard[xPosition + i][yPosition - i] = word[i];
-          }
-          setBoard(currentBoard);
-          return true;
-        } else return false;
-      case 5: // North-West to South-East
-        if(xPosition - wordLength >= 0 && yPosition + wordLength <= board.length){
-          for(i = 0; i < wordLength; i++){
-            currentBoard[xPosition - i][yPosition + i] = word[i];
-          }
-          setBoard(currentBoard);
-          return true;
-        } else return false;
-      case 6: // South-East to North-West
-        if(xPosition - wordLength >= 0 && yPosition - wordLength >= 0){
-          for(i = 0; i < wordLength; i++){
-            currentBoard[xPosition - i][yPosition - i] = word[i];
-          }
-          setBoard(currentBoard);
-          return true;
-        } else return false;
-      case 7: // South-West to North-East
+      case 2: // North-West to South-East
         if(xPosition + wordLength <= board.length && yPosition + wordLength <= board.length){
           for(i = 0; i < wordLength; i++){
-            currentBoard[xPosition + i][yPosition + i] = word[i];
+            if(currentBoard[xPosition + i][yPosition + i] === "" || currentBoard[xPosition + i][yPosition + i] === word[i]){
+              currentBoard[xPosition + i][yPosition + i] = word[i];
+            } else {
+              for(var j = 0; j < i; j++){
+                currentBoard[xPosition + j][yPosition + j] = "";
+              }
+              setBoard(currentBoard);
+              return false;
+            };
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 3: // South-West to North-East
+        if(xPosition - wordLength >= 0 && yPosition + wordLength <= board.length){
+          for(i = 0; i < wordLength; i++){
+            if(currentBoard[xPosition - i][yPosition + i] === "" || currentBoard[xPosition - i][yPosition + i] === word[i]){
+              currentBoard[xPosition - i][yPosition + i] = word[i];
+            } else {
+              for(var j = 0; j < i; j++){
+                currentBoard[xPosition - j][yPosition + j] = "";
+              }
+              setBoard(currentBoard);
+              return false;
+            };
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 4: // South to North
+        if(xPosition - wordLength >= 0){
+          for(i = 0; i < wordLength; i++){
+            if(currentBoard[xPosition - i][yPosition] === "" || currentBoard[xPosition - i][yPosition] === word[i]){
+              currentBoard[xPosition - i][yPosition] = word[i];
+            } else {
+              for(var j = 0; j < i; j++){
+                currentBoard[xPosition - j][yPosition] = "";
+              }
+              setBoard(currentBoard);
+              return false;
+            };
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 5: // South-East to North-West
+        if(xPosition - wordLength >= 0 && yPosition - wordLength >= 0){
+          for(i = 0; i < wordLength; i++){
+            if(currentBoard[xPosition - i][yPosition - i] === "" || currentBoard[xPosition - i][yPosition - i] === word[i]){
+              currentBoard[xPosition - i][yPosition - i] = word[i];
+            } else {
+              for(var j = 0; j < i; j++){
+                currentBoard[xPosition - j][yPosition - j] = "";
+              }
+              setBoard(currentBoard);
+              return false;
+            };
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 6: // East to West
+        if(yPosition - wordLength >= 0){
+          for(i = 0; i < wordLength; i++){
+            if(currentBoard[xPosition][yPosition - i] === "" || currentBoard[xPosition][yPosition - i] === word[i]){
+              currentBoard[xPosition][yPosition - i] = word[i];
+            } else {
+              for(var j = 0; j < i; j++){
+                currentBoard[xPosition][yPosition - j] = "";
+              }
+              setBoard(currentBoard);
+              return false;
+            };
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 7: // North-East to South-West
+        if(xPosition + wordLength <= board.length && yPosition - wordLength >= 0){
+          for(i = 0; i < wordLength; i++){
+            if(currentBoard[xPosition + i][yPosition - i] === "" || currentBoard[xPosition + i][yPosition - i] === word[i]){
+              currentBoard[xPosition + i][yPosition - i] = word[i];
+            } else {
+              for(var j = 0; j < i; j++){
+                currentBoard[xPosition + j][yPosition - j] = "";
+              }
+              setBoard(currentBoard);
+              return false;
+            };
           }
           setBoard(currentBoard);
           return true;
@@ -219,11 +275,27 @@ function App() {
     for (let i = 0; i < tabDim; i++) {
       let row = [];
       for (let j = 0; j < tabDim; j++) {
-        row.push(possibleLetters[Math.floor(Math.random() * possibleLetters.length)]);
+        // row.push(possibleLetters[Math.floor(Math.random() * possibleLetters.length)]);
+        row.push("")
       }
       board.push(row);
     }
     return board;
+  }
+
+  function generateWords(numWords) {
+    const initialWords = shuffleArray(PALAVRAS);
+    const slicedInitialWords = initialWords.slice(0, numWords);
+    const wordsObjects = [];
+    slicedInitialWords.forEach((word, index) => {
+      wordsObjects.push({
+        key: `${word}-${index}`,
+        index: index,
+        word: word,
+      });
+    });
+    shuffleArray(wordsObjects);
+    return wordsObjects;
   }
 
 }

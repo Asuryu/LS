@@ -8,13 +8,13 @@ function Board(props) {
     var board = props.board;
     switch(props.selectedLevel){
         case "1":
-            gridClass = "grid-8x8";
-            break;
-        case "2":
             gridClass = "grid-10x10";
             break;
-        case "3":
+        case "2":
             gridClass = "grid-12x12";
+            break;
+        case "3":
+            gridClass = "grid-15x15";
             break;
         default:
             gridClass = "";
