@@ -34,11 +34,17 @@ function ControlPanel(props) {
           disabled={props.selectedLevel === "0"}
           onClick={props.onGameStart}
       >{props.gameStarted ? "Parar o jogo" : "Começar o jogo!"}</button>
-
-      <div className="extraWords">
+        
+        <div className="extraWords">
+        <input id = "inputWord" placeholder="Introduza a palavra" disabled={props.gameStarted}></input>
+        <button 
+        type="button"
+        id= "writeBtn"
+        disabled={props.gameStarted} 
+        onClick={props.onAddWord}
+        >Adicionar Palavra</button>
         <h1>Palavras Extra</h1>
       </div>
-
     </div>
   );
 }

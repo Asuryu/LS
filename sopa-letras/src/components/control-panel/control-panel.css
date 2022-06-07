@@ -67,6 +67,23 @@
     background-color: #971919;
 }
 
+#writeBtn{
+    transition: 0.1s;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: #8f1cc4;
+    color: white;
+    width: calc(100% - 20px);
+    height: 30px;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
 #scoreboard{
     position: absolute;
     top: 10px;
