@@ -8,6 +8,10 @@
     src: url("../../../public/fonts/Nexa\ Light.otf");
 }
 
+*:focus {
+    outline: none;
+}
+
 #control-panel{
     z-index: 2;
     position: absolute;
@@ -83,6 +87,17 @@
     cursor: pointer;
 }
 
+#writeBtn:hover{
+    transition: 0.3s;
+    background-color: #631288;
+}
+
+#writeBtn:disabled{
+    transition: 0;
+    background-color: #3e3e3e;
+    color: #868686;
+    cursor: default;    
+}
 
 #scoreboard{
     position: absolute;
@@ -140,6 +155,20 @@
     font-family: NexaBold;
 }
 
+#inputWord{
+    position: absolute;
+    bottom: 45px; 
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    color: black;
+    width: calc(100% - 60px);
+    height: 20px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
 .form-group{
     position: absolute;
     top: 200px;
@@ -194,7 +223,7 @@
     top: 333px;
     left: 50%;
     width: calc(100% - 20px);
-    height: 165px;
+    height: 110px;
     transform: translate(-50%, -50%);
     text-align: center;
     border: none;
@@ -216,3 +245,4 @@
     margin: 0;
     font-family: NexaBold;
 }
+

@@ -37,7 +37,8 @@ function App() {
 
   const addWord = (event) => {
     var inputValue = document.getElementById("inputWord").value;
-    if(extraWords < EXTRA_WORDS && inputValue.length <= tabDim - 3) {
+ 
+    if(extraWords < EXTRA_WORDS && inputValue.length <= tabDim - 3 && inputValue > 0 && words.some(word => word.word === inputValue)) {
       var newWords = [...words];
       
       newWords.push({
