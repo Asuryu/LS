@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { TIMEOUTGAME, PALAVRAS } from "./constants";
+import { TIMEOUTGAME, PALAVRAS, EXTRA_WORDS } from "./constants";
 
 import "./App.css"
 
@@ -14,6 +14,7 @@ var timerId = null;
 var tabDim = 0;
 var numWords = 0;
 var timeModifier = 0;
+var extraWords = 0;
 
 function App() {
 
@@ -22,7 +23,6 @@ function App() {
   const [words, setWords] = useState([])
   const [timer, setTimer] = useState(TIMEOUTGAME);
   const [board, setBoard] = useState([]);
-  const [extraWords, setExtraWords] = useState([]);
   // const [collectedLetters, setCollectedLetters] = useState([]);
 
   const handleGameStart = () => {
@@ -36,15 +36,20 @@ function App() {
   };
 
   const addWord = (event) => {
-    var inputvalue = document.getElementById("inputWord").value
-    extraWords.push({
-      key: `${inputvalue}-${words.length}`,
-      index: words.length,
-      word: inputvalue,
-    });
-    setExtraWords(extraWords);
-    console.log(extraWords);
+    var inputValue = document.getElementById("inputWord").value;
+    if(extraWords < EXTRA_WORDS && inputValue.length <= tabDim - 3) {
+      var newWords = [...words];
+      
+      newWords.push({
+        key: `${inputValue}-${words.length}`,
+        index: words.length,
+        word: inputValue,
+      });
+      setWords(newWords);
+      extraWords++;
+    }
   }
+
   const handleLevelChange = (event) => {
     const {value} = event.currentTarget;
     setSelectedLevel(value);
@@ -118,7 +123,8 @@ function App() {
           selectedLevel={selectedLevel}
           board={board}
         />
-        <Words words={words}></Words>
+        <Words words={words}
+        />
         <Timer 
           timer={timer}
           gameStarted={gameStarted}
@@ -296,6 +302,7 @@ function App() {
   }
 
   function generateWords(numWords) {
+    extraWords = 0;
     const initialWords = shuffleArray(PALAVRAS);
     const slicedInitialWords = initialWords.slice(0, numWords);
     const wordsObjects = [];

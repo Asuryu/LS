@@ -21,3 +21,4 @@ export const COLOR_PALETTE = [
 ]
 
 export const TIMEOUTGAME = 50;
+export const EXTRA_WORDS = 2;
