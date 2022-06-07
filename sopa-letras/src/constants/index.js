@@ -4,10 +4,8 @@ export const PALAVRAS = [
     "vue",
     "ember",
     "backbone",
-    "bootstrap",
     "meteor",
     "html",
-    "javascript",
     "css",
     "svelte",
     "electron",
@@ -22,4 +20,4 @@ export const COLOR_PALETTE = [
     "#C40CE8", "#950DFF", "#0C46E8", "#0D8CFF", "#0CAEE8", "#0CE8AA", "#0DFF76"
 ]
 
-export const TIMEOUTGAME = 30;
+export const TIMEOUTGAME = 50;

@@ -11,7 +11,7 @@ import ControlPanel from './components/control-panel/control-panel.component';
 import shuffleArray from "./helpers/shuffleArray";
 
 var timerId = null;
-var timeModifier = 0;
+var tabDim = 0;
 
 function App() {
 
@@ -19,7 +19,8 @@ function App() {
   const [selectedLevel, setSelectedLevel] = useState("0");
   const [words, setWords] = useState([])
   const [timer, setTimer] = useState(TIMEOUTGAME);
-  const [collectedLetters, setCollectedLetters] = useState([]);
+  const [board, setBoard] = useState([]);
+  // const [collectedLetters, setCollectedLetters] = useState([]);
 
   const handleGameStart = () => {
     if (gameStarted) {
@@ -27,6 +28,9 @@ function App() {
       setGameStarted(false);
     } else {
       console.log("Inicia Jogo");
+      var generatedBoard = generateBoard(tabDim);
+      setBoard(generatedBoard);
+      placeWordsOnBoard(words);
       setGameStarted(true);
     }
   };
@@ -35,7 +39,6 @@ function App() {
     const {value} = event.currentTarget;
     setSelectedLevel(value);
 
-    var tabDim = 0;
     var numWords = 0;
     var timeModifier = 0;
     switch (value) {
@@ -69,8 +72,11 @@ function App() {
       });
     });
     shuffleArray(wordsObjects);
+
     setWords(wordsObjects);
     setTimer(TIMEOUTGAME + timeModifier);
+    var generatedBoard = generateBoard(tabDim);
+    setBoard(generatedBoard);
   };
 
   useEffect(() => {
@@ -107,8 +113,8 @@ function App() {
           onLevelChange={handleLevelChange}
         />
         <Board
-          words={words}
           selectedLevel={selectedLevel}
+          board={board}
         />
         <Words words={words}></Words>
         <Timer 
@@ -119,6 +125,107 @@ function App() {
       </div>
     </div>
   );
+
+  function placeWordsOnBoard(words){
+
+    words.forEach((word, index) => {
+      do {
+        var currentWord = word.word;
+        var wordLength = currentWord.length;
+        var randomX = Math.floor(Math.random() * tabDim);
+        var randomY = Math.floor(Math.random() * tabDim);
+        var randomDirection = Math.floor(Math.random() * 8);
+      } while (!placeWord(currentWord, wordLength, randomX, randomY, randomDirection));
+    });
+  }
+  
+  function placeWord(word, wordLength, xPosition, yPosition, direction){
+    var i = 0;
+    var currentBoard = board;
+    word = word.toUpperCase();
+    switch (direction) {
+      case 0: // North to South
+        if(xPosition + wordLength <= board.length){
+          for(i = 0; i < wordLength; i++){
+            currentBoard[xPosition + i][yPosition] = word[i];
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 1: // East to West
+        if(yPosition + wordLength <= board.length){
+          for(i = 0; i < wordLength; i++){
+            currentBoard[xPosition][yPosition + i] = word[i];
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 2: // South to North
+        if(xPosition - wordLength >= 0){
+          for(i = 0; i < wordLength; i++){
+            currentBoard[xPosition - i][yPosition] = word[i];
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 3: // West to East
+        if(yPosition - wordLength >= 0){
+          for(i = 0; i < wordLength; i++){
+            currentBoard[xPosition][yPosition - i] = word[i];
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 4: // North-East to South-West
+        if(xPosition + wordLength <= board.length && yPosition - wordLength >= 0){
+          for(i = 0; i < wordLength; i++){
+            currentBoard[xPosition + i][yPosition - i] = word[i];
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 5: // North-West to South-East
+        if(xPosition - wordLength >= 0 && yPosition + wordLength <= board.length){
+          for(i = 0; i < wordLength; i++){
+            currentBoard[xPosition - i][yPosition + i] = word[i];
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 6: // South-East to North-West
+        if(xPosition - wordLength >= 0 && yPosition - wordLength >= 0){
+          for(i = 0; i < wordLength; i++){
+            currentBoard[xPosition - i][yPosition - i] = word[i];
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      case 7: // South-West to North-East
+        if(xPosition + wordLength <= board.length && yPosition + wordLength <= board.length){
+          for(i = 0; i < wordLength; i++){
+            currentBoard[xPosition + i][yPosition + i] = word[i];
+          }
+          setBoard(currentBoard);
+          return true;
+        } else return false;
+      default:
+        return false;
+    }
+  }
+
+  function generateBoard(tabDim) {
+    let board = [];
+    let possibleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (let i = 0; i < tabDim; i++) {
+      let row = [];
+      for (let j = 0; j < tabDim; j++) {
+        row.push(possibleLetters[Math.floor(Math.random() * possibleLetters.length)]);
+      }
+      board.push(row);
+    }
+    return board;
+  }
+
 }
 
 export default App;

@@ -3,47 +3,34 @@ import Letter from "../letter/letter.component";
 import "./board.css";
 
 function Board(props) {
-    var totalLetters;
+
     var gridClass;
+    var board = props.board;
     switch(props.selectedLevel){
         case "1":
-            totalLetters = 8 * 8;
             gridClass = "grid-8x8";
             break;
         case "2":
-            totalLetters = 10 * 10;
             gridClass = "grid-10x10";
             break;
         case "3":
-            totalLetters = 12 * 12;
             gridClass = "grid-12x12";
             break;
         default:
-            totalLetters = 0;
             gridClass = "";
+            board = [];
             break;
     }
 
-    let board = generateBoard(totalLetters);
-
     return (
         <div className={"board " + gridClass}>
-            {board.map((letter) => {
-                return <Letter letter={letter} />
+            {board.map((row, rowIndex) => {
+                return row.map((letter, colIndex) => {
+                    return <Letter key={rowIndex + "-" + colIndex} letter={letter} />
+                })
             })}
         </div>
     )
 }
-
-function generateBoard(size) {
-    let board = [];
-    let possibleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    for (let i = 0; i < size; i++) {
-        board.push(possibleLetters[Math.floor(Math.random() * possibleLetters.length)]);
-    }
-    return board;
-}
-
-
 
 export default Board;

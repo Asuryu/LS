@@ -19,7 +19,7 @@ function Timer(props) {
 
     return (
         <div className="timer">
-            <i className={"fa-solid fa-clock " + timerClass}></i><spann> Tempo Restante: </spann><span className={timerClass}>{timer}</span>
+            <i className={"fa-solid fa-clock " + timerClass}></i><span> Tempo Restante: </span><span className={timerClass}>{timer}</span>
         </div>
     )
 }

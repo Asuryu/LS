@@ -3,7 +3,8 @@
     right: 30px;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #11111135;
+    /* background-color: #11111135; */
+    background-color: #b6b6b69d;
     border-radius: 10px;
     padding: 10px;
 }

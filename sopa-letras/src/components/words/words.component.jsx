@@ -3,7 +3,6 @@ import "./words.css";
 import { COLOR_PALETTE } from "../../constants";
 
 function Words(props) {
-    console.log(props.words);
     return (
         <div className="words">
             <ul className="words-list">
