@@ -29,8 +29,15 @@ function App() {
     if (gameStarted) {
       setBoard(generateBoard(tabDim));
       setGameStarted(false);
+      words.splice(numWords, words.length);
+      setExtraWords([]);
     } else {
+      const wordsObjects = generateWords(numWords);
+      wordsObjects.push(...extraWords);
+      setWords(wordsObjects);
+      words.push(...extraWords);
       placeWordsOnBoard(words);
+      console.log(wordsObjects);
       // fillWithRandomLetters(board, tabDim);
       setGameStarted(true);
     }
@@ -40,11 +47,14 @@ function App() {
     var inputValue = document.getElementById("inputWord").value.toLowerCase();
     if(extraWords.length < EXTRA_WORDS && inputValue.length <= tabDim - 3 && !words.some(word => word.word === inputValue) && inputValue.length > 0) {
       var newWords = [...extraWords];
-      newWords.push({
+      var obj = {
         key: `${inputValue}-${extraWords.length}`,
         index: extraWords.length,
         word: inputValue,
-      });
+      }
+      newWords.push(obj);
+      // add extra words to words list
+      setWords([...words, obj]);
       setExtraWords(newWords);
       document.getElementById("inputWord").value = "";
     }
@@ -81,6 +91,7 @@ function App() {
     setWords(wordsObjects);
     setTimer(TIMEOUTGAME + timeModifier);
     setBoard(generateBoard(tabDim));
+    setExtraWords([]);
   };
 
   useEffect(() => {
@@ -94,6 +105,8 @@ function App() {
         if(nextTimer === 0){
           setBoard(generateBoard(tabDim));
           setGameStarted(false);
+          words.splice(numWords, words.length);
+          setExtraWords([]);
         }
       }, 1000);
     } else if(timer !== TIMEOUTGAME){
