@@ -14,7 +14,6 @@ var timerId = null;
 var tabDim = 0;
 var numWords = 0;
 var timeModifier = 0;
-var extraWords = 0;
 
 function App() {
 
@@ -23,6 +22,7 @@ function App() {
   const [words, setWords] = useState([])
   const [timer, setTimer] = useState(TIMEOUTGAME);
   const [board, setBoard] = useState([]);
+  const [extraWords, setExtraWords] = useState([]);
   // const [collectedLetters, setCollectedLetters] = useState([]);
 
   const handleGameStart = () => {
@@ -31,22 +31,22 @@ function App() {
       setGameStarted(false);
     } else {
       placeWordsOnBoard(words);
+      // fillWithRandomLetters(board, tabDim);
       setGameStarted(true);
     }
   };
 
   const addWord = (event) => {
     var inputValue = document.getElementById("inputWord").value.toLowerCase();
-    if(extraWords < EXTRA_WORDS && inputValue.length <= tabDim - 3 && !words.some(word => word.word === inputValue) && inputValue.length > 0) {
-      var newWords = [...words];
-      
+    if(extraWords.length < EXTRA_WORDS && inputValue.length <= tabDim - 3 && !words.some(word => word.word === inputValue) && inputValue.length > 0) {
+      var newWords = [...extraWords];
       newWords.push({
-        key: `${inputValue}-${words.length}`,
-        index: words.length,
+        key: `${inputValue}-${extraWords.length}`,
+        index: extraWords.length,
         word: inputValue,
       });
-      setWords(newWords);
-      extraWords++;
+      setExtraWords(newWords);
+      document.getElementById("inputWord").value = "";
     }
   }
 
@@ -77,7 +77,6 @@ function App() {
         break;
     }
 
-    
     const wordsObjects = generateWords(numWords);
     setWords(wordsObjects);
     setTimer(TIMEOUTGAME + timeModifier);
@@ -93,8 +92,8 @@ function App() {
           return nextTimer;
         });
         if(nextTimer === 0){
-          setGameStarted(false);
           setBoard(generateBoard(tabDim));
+          setGameStarted(false);
         }
       }, 1000);
     } else if(timer !== TIMEOUTGAME){
@@ -117,13 +116,16 @@ function App() {
           onGameStart={handleGameStart}
           selectedLevel={selectedLevel}
           onLevelChange={handleLevelChange}
+          extraWords={extraWords}
           onAddWord={addWord}
         />
         <Board
           selectedLevel={selectedLevel}
           board={board}
         />
-        <Words words={words}
+        <Words 
+          words={words} 
+          gameStarted={gameStarted} 
         />
         <Timer 
           timer={timer}
@@ -150,7 +152,7 @@ function App() {
   }
   
   function placeWord(word, wordLength, xPosition, yPosition, direction){
-    var i = 0;
+    var i = 0, j = 0;
     var currentBoard = board;
     word = word.toUpperCase();
     switch (direction) {
@@ -160,7 +162,7 @@ function App() {
             if(currentBoard[xPosition][yPosition + i] === "" || currentBoard[xPosition][yPosition + i] === word[i]){
               currentBoard[xPosition][yPosition + i] = word[i];
             } else {
-              for(var j = 0; j < i; j++){
+              for(j = 0; j < i; j++){
                 currentBoard[xPosition][yPosition + j] = "";
               }
               setBoard(currentBoard);
@@ -176,7 +178,7 @@ function App() {
             if(currentBoard[xPosition + i][yPosition] === "" || currentBoard[xPosition + i][yPosition] === word[i]){
               currentBoard[xPosition + i][yPosition] = word[i];
             } else {
-              for(var j = 0; j < i; j++){
+              for(j = 0; j < i; j++){
                 currentBoard[xPosition + j][yPosition] = "";
               }
               setBoard(currentBoard);
@@ -192,7 +194,7 @@ function App() {
             if(currentBoard[xPosition + i][yPosition + i] === "" || currentBoard[xPosition + i][yPosition + i] === word[i]){
               currentBoard[xPosition + i][yPosition + i] = word[i];
             } else {
-              for(var j = 0; j < i; j++){
+              for(j = 0; j < i; j++){
                 currentBoard[xPosition + j][yPosition + j] = "";
               }
               setBoard(currentBoard);
@@ -208,7 +210,7 @@ function App() {
             if(currentBoard[xPosition - i][yPosition + i] === "" || currentBoard[xPosition - i][yPosition + i] === word[i]){
               currentBoard[xPosition - i][yPosition + i] = word[i];
             } else {
-              for(var j = 0; j < i; j++){
+              for(j = 0; j < i; j++){
                 currentBoard[xPosition - j][yPosition + j] = "";
               }
               setBoard(currentBoard);
@@ -224,7 +226,7 @@ function App() {
             if(currentBoard[xPosition - i][yPosition] === "" || currentBoard[xPosition - i][yPosition] === word[i]){
               currentBoard[xPosition - i][yPosition] = word[i];
             } else {
-              for(var j = 0; j < i; j++){
+              for(j = 0; j < i; j++){
                 currentBoard[xPosition - j][yPosition] = "";
               }
               setBoard(currentBoard);
@@ -240,7 +242,7 @@ function App() {
             if(currentBoard[xPosition - i][yPosition - i] === "" || currentBoard[xPosition - i][yPosition - i] === word[i]){
               currentBoard[xPosition - i][yPosition - i] = word[i];
             } else {
-              for(var j = 0; j < i; j++){
+              for(j = 0; j < i; j++){
                 currentBoard[xPosition - j][yPosition - j] = "";
               }
               setBoard(currentBoard);
@@ -256,7 +258,7 @@ function App() {
             if(currentBoard[xPosition][yPosition - i] === "" || currentBoard[xPosition][yPosition - i] === word[i]){
               currentBoard[xPosition][yPosition - i] = word[i];
             } else {
-              for(var j = 0; j < i; j++){
+              for(j = 0; j < i; j++){
                 currentBoard[xPosition][yPosition - j] = "";
               }
               setBoard(currentBoard);
@@ -272,7 +274,7 @@ function App() {
             if(currentBoard[xPosition + i][yPosition - i] === "" || currentBoard[xPosition + i][yPosition - i] === word[i]){
               currentBoard[xPosition + i][yPosition - i] = word[i];
             } else {
-              for(var j = 0; j < i; j++){
+              for(j = 0; j < i; j++){
                 currentBoard[xPosition + j][yPosition - j] = "";
               }
               setBoard(currentBoard);
@@ -288,21 +290,18 @@ function App() {
   }
 
   function generateBoard(tabDim) {
-    let board = [];
-    let possibleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let tmpBoard = [];
     for (let i = 0; i < tabDim; i++) {
       let row = [];
       for (let j = 0; j < tabDim; j++) {
-        // row.push(possibleLetters[Math.floor(Math.random() * possibleLetters.length)]);
         row.push("")
       }
-      board.push(row);
+      tmpBoard.push(row);
     }
-    return board;
+    return tmpBoard;
   }
 
   function generateWords(numWords) {
-    extraWords = 0;
     const initialWords = shuffleArray(PALAVRAS);
     const slicedInitialWords = initialWords.slice(0, numWords);
     const wordsObjects = [];
@@ -315,6 +314,18 @@ function App() {
     });
     shuffleArray(wordsObjects);
     return wordsObjects;
+  }
+
+  function fillWithRandomLetters(board, tabDim) {
+    let possibleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (let i = 0; i < tabDim; i++) {
+      for (let j = 0; j < tabDim; j++) {
+        if (board[i][j] === "") {
+          board[i][j] = possibleLetters[Math.floor(Math.random() * possibleLetters.length)];
+        }
+      }
+    }
+    return board;
   }
 
 }

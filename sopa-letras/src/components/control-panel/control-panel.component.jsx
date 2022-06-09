@@ -1,4 +1,5 @@
 import React from "react";
+import { EXTRA_WORDS } from "../../constants";
 import "./control-panel.css";
 
 function ControlPanel(props) {
@@ -36,14 +37,15 @@ function ControlPanel(props) {
       >{props.gameStarted ? "Parar o jogo" : "Começar o jogo!"}</button>
         
         <div className="extraWords">
-        <input id = "inputWord" placeholder="Introduza a palavra" disabled={props.gameStarted}></input>
+        <input id = "inputWord" placeholder="Introduza a palavra" disabled={props.gameStarted || props.selectedLevel === "0"}></input>
         <button 
         type="button"
         id= "writeBtn"
-        disabled={props.gameStarted} 
+        disabled={props.gameStarted || props.selectedLevel === "0"} 
         onClick={props.onAddWord}
         >Adicionar Palavra</button>
         <h1>Palavras Extra</h1>
+        <h2>{Math.abs(EXTRA_WORDS - props.extraWords.length) + " restante(s)"}</h2>
       </div>
     </div>
   );

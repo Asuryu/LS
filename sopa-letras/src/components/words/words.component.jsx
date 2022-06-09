@@ -3,8 +3,9 @@ import "./words.css";
 import { COLOR_PALETTE } from "../../constants";
 
 function Words(props) {
+    
     return (
-        <div className="words">
+        <div style={{display: props.gameStarted ? "block" : "none"}} className="words">
             <ul className="words-list">
                 {props.words.map(word => {
                     return (
