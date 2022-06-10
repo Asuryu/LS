@@ -10,6 +10,7 @@
     border-radius: 10px;
     min-width: 400px;
     min-height: 400px;
+    cursor: pointer;
 }
 
 .grid-8x8{

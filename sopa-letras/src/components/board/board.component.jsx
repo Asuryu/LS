@@ -26,7 +26,13 @@ function Board(props) {
         <div className={"board " + gridClass}>
             {board.map((row, rowIndex) => {
                 return row.map((letter, colIndex) => {
-                    return <Letter key={rowIndex + "-" + colIndex} letter={letter} />
+                    return <Letter 
+                                key={rowIndex + "-" + colIndex} 
+                                letter={letter} 
+                                handleDragStart={props.handleDragStart}
+                                handleDragEnter={props.handleDragEnter}
+                                handleDragEnd={props.handleDragEnd}
+                            />
                 })
             })}
         </div>

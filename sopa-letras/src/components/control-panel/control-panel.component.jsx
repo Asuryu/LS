@@ -37,7 +37,7 @@ function ControlPanel(props) {
       >{props.gameStarted ? "Parar o jogo" : "Começar o jogo!"}</button>
         
         <div className="extraWords">
-        <input id = "inputWord" placeholder="Introduza a palavra" disabled={props.gameStarted || props.selectedLevel === "0"}></input>
+        <input id = "inputWord" placeholder="Introduza uma palavra" disabled={props.gameStarted || props.selectedLevel === "0"}></input>
         <button 
         type="button"
         id= "writeBtn"
@@ -47,6 +47,18 @@ function ControlPanel(props) {
         <h1>Palavras Extra</h1>
         <h2>{Math.abs(EXTRA_WORDS - props.extraWords.length) + " restante(s)"}</h2>
       </div>
+
+      <div id="playerName">
+        <h1>{props.playerName ? props.playerName : "Olá, estranho"}</h1>
+        <input id = "inputName" placeholder="Introduza um nome" disabled={props.gameStarted}></input>
+        <button 
+        type="button"
+        id= "setNameBtn"
+        disabled={props.gameStarted} 
+        onClick={props.onChangeName}
+        >Definir Nome</button>
+      </div>
+
     </div>
   );
 }

@@ -19,7 +19,7 @@
     left: 30px;
     transform: translate(0%, -50%);
     width: 230px;
-    height: 70vh;
+    height: 83vh;
     background-color: rgba(47, 47, 47, 0.485);
     border-radius: 10px;
 }
@@ -155,6 +155,71 @@
     font-family: NexaBold;
 }
 
+#playerName{
+    position: absolute;
+    top: 388px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    text-align: center;
+    border-radius: 7px;
+    background-color: #ff4f81;
+    width: calc(100% - 20px);
+    height: 112px;
+}
+#playerName h1{
+    position: absolute;
+    top: 13px;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, 0%);
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    font-family: NexaBold;
+    overflow: scroll;
+}
+#inputName{
+    position: absolute;
+    top: 43px; 
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    color: black;
+    width: calc(100% - 30px);
+    height: 20px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+#setNameBtn{
+    transition: 0.1s;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: #a13654;
+    color: white;
+    width: calc(100% - 20px);
+    height: 30px;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#setNameBtn:hover{
+    transition: 0.3s;
+    background-color: #862e49;
+}
+
+#setNameBtn:disabled{
+    transition: 0;
+    background-color: #633741;
+    color: #868686;
+    cursor: default;    
+}
+
 #inputWord{
     position: absolute;
     bottom: 48px; 
@@ -220,7 +285,7 @@
 
 .extraWords{
     position: absolute;
-    top: 312px;
+    top: 311px;
     left: 50%;
     width: calc(100% - 20px);
     height: 125px;

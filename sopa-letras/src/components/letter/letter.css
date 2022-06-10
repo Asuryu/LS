@@ -1,4 +1,5 @@
 .piece{
+    z-index: 1000;
     transition: 0.2s;
     background-color: rgb(255, 163, 106);
     border-radius: 3px;    
@@ -6,7 +7,21 @@
     cursor: pointer;
 }
 
+.letterWrap{
+
+}
+
+.selected{
+    background-color: rgb(141, 89, 56);
+}
+
+.guessed{
+    background-color: rgb(174, 113, 75);
+    opacity: 1;
+}
+
 .letter{
+    z-index: 999;
     padding: 0;
     margin: 0;
     position: relative;
@@ -20,6 +35,7 @@
     font-size: 1.5em;
     font-weight: bold;
     user-select: none;
+    cursor: default;
 }
 
 .piece:hover{
