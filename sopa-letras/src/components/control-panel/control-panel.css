@@ -178,7 +178,7 @@
     font-weight: bold;
     margin: 0;
     font-family: NexaBold;
-    overflow: scroll;
+    overflow: none;
 }
 #inputName{
     position: absolute;

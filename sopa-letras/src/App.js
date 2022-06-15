@@ -9,6 +9,7 @@ import Words from './components/words/words.component';
 import Timer from './components/timer/timer.component';
 import ControlPanel from './components/control-panel/control-panel.component';
 import shuffleArray from "./helpers/shuffleArray";
+import Points from "./components/points/points.component";
 
 var timerId = null;
 var tabDim = 0;
@@ -28,6 +29,7 @@ function App() {
   const [totalCollectedLetters, setTotalCollectedLetters] = useState([]);
   const [foundWords, setFoundWords] = useState(0);
   const [playerName, setPlayerName] = useState("");
+  const [playerScore, setPlayerScore] = useState(0);
 
   const handleDragStart = (event) => {
     if(gameStarted){
@@ -69,10 +71,19 @@ function App() {
             element.className = "piece letterWrap";
             element.style.backgroundColor = COLOR_PALETTE[wordFound.index];
           });
+            let points = Math.round((100 / wordFound.word.length) + timer * 1.85);
+            setPlayerScore(playerScore + points);
         } else {
           collectedLetters.forEach(element => {
             element.className = "piece letterWrap";
           });
+          let losepoints = Math.round(completeWord.length / 1.5) * 25;
+          if((playerScore - losepoints) >= 0){
+            setPlayerScore(playerScore - losepoints);
+          }
+          else{
+            setPlayerScore(0);
+          }
         }
       } else {
         collectedLetters.forEach(element => {
@@ -88,7 +99,7 @@ function App() {
       return false;
     }
   }
-
+  
   const handleGameStart = () => {
     if (gameStarted) {
       setFoundWords(0);
@@ -97,6 +108,7 @@ function App() {
       setGameStarted(false);
       words.splice(numWords, words.length);
       setExtraWords([]);
+      setPlayerScore(0);
     } else {
       const wordsObjects = generateWords(numWords);
       wordsObjects.push(...extraWords);
@@ -106,6 +118,7 @@ function App() {
       console.log(wordsObjects);
       //fillWithRandomLetters(board, tabDim);
       setGameStarted(true);
+      setPlayerScore(0);
     }
   };
 
@@ -163,6 +176,7 @@ function App() {
     setBoard(generateBoard(tabDim));
     setExtraWords([]);
     setFoundWords(0);
+    setPlayerScore(0);
   };
 
   const handleNameChange = (event) => {
@@ -170,6 +184,7 @@ function App() {
     if(inputValue.length > 0 && inputValue.length <= 13){
       setPlayerName(inputValue);
       document.getElementById("inputName").value = "";
+      setPlayerScore(0);
     }
   }
 
@@ -199,6 +214,7 @@ function App() {
           setGameStarted(false);
           words.splice(numWords, words.length);
           setExtraWords([]);
+          setPlayerScore(0);
         }
       }, 1000);
     } else if(timer !== TIMEOUTGAME){
@@ -242,6 +258,9 @@ function App() {
           gameStarted={gameStarted}
           selectedLevel={selectedLevel}
         />
+        <Points
+          playerScore={playerScore}
+        ></Points>
       </div>
     </div>
   );
@@ -439,6 +458,8 @@ function App() {
     shuffleArray(wordsObjects);
     return wordsObjects;
   }
+
+  
 
   function fillWithRandomLetters(board, tabDim) {
     let possibleLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

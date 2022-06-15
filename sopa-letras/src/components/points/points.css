@@ -1,0 +1,16 @@
+@font-face {
+    font-family: NexaBold;
+    src: url("../../../public/fonts/Nexa\ Bold.otf");
+}
+
+@font-face {
+    font-family: NexaLight;
+    src: url("../../../public/fonts/Nexa\ Light.otf");
+}
+
+
+.points{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
