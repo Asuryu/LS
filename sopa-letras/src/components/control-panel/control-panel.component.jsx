@@ -15,22 +15,25 @@ function ControlPanel(props) {
         }
       )}
       </div>
-      <form className="form">
-        <fieldset className="form-group">
-          <label htmlFor="btLevel">Dificuldade</label>
-          <select
-            id="btLevel"
-            defaultValue="0"
-            onChange={props.onLevelChange}
-            disabled={props.gameStarted}
-          >
-            <option value="0">Selecione uma dificuldade...</option>
-            <option value="1">Simples (10x10) - 4 palavras</option>
-            <option value="2">Intermédio (12x12) - 7 palavras</option>
-            <option value="3">Avançado (15x15) - 10 palavras</option>
-          </select>
-        </fieldset>
-      </form>
+
+      <div id="controls">
+        <form className="form">
+          <fieldset className="form-group">
+            <label htmlFor="btLevel">Dificuldade</label>
+            <select
+              id="btLevel"
+              defaultValue="0"
+              onChange={props.onLevelChange}
+              disabled={props.gameStarted}
+            >
+              <option value="0">Selecione uma dificuldade...</option>
+              <option value="1">Simples (10x10) - 4 palavras</option>
+              <option value="2">Intermédio (12x12) - 7 palavras</option>
+              <option value="3">Avançado (15x15) - 10 palavras</option>
+            </select>
+          </fieldset>
+        </form>
+      </div>
       <button
           type="button"
           id={props.gameStarted ? "stopBtn" : "startBtn"}
@@ -59,6 +62,11 @@ function ControlPanel(props) {
         disabled={props.gameStarted} 
         onClick={props.onChangeName}
         >Definir Nome</button>
+      </div>
+
+      <div id="currentScore" style={{display: props.gameStarted ? "block" : "none" }}>
+        <h1>Pontuação Atual</h1>
+        <div><i className={"fa-solid fa-star"}></i> <span>{props.playerScore}</span></div>
       </div>
 
     </div>

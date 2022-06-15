@@ -9,7 +9,6 @@ import Words from './components/words/words.component';
 import Timer from './components/timer/timer.component';
 import ControlPanel from './components/control-panel/control-panel.component';
 import shuffleArray from "./helpers/shuffleArray";
-import Points from "./components/points/points.component";
 
 var timerId = null;
 var tabDim = 0;
@@ -266,9 +265,6 @@ function App() {
           gameStarted={gameStarted}
           selectedLevel={selectedLevel}
         />
-        <Points
-          playerScore={playerScore}
-        ></Points>
       </div>
     </div>
   );
