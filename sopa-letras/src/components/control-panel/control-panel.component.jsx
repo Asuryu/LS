@@ -8,11 +8,13 @@ function ControlPanel(props) {
 
       <div id="scoreboard">
         <h1>Scoreboard</h1>
-        <div className="score" id="score-1"><h1>1. Tomás Pinto (999)</h1></div>
-        <div className="score" id="score-2"><h1>2. Tomás Silva (320)</h1></div>
-        <div className="score" id="score-3"><h1>3. Professor (300)</h1></div>
+       {props.playersBoard.map((player, index) => {
+          return (
+            <div className="score" id={"score-" + (index + 1)}><h1>{(index + 1) + ". " + player}</h1></div>
+          );
+        }
+      )}
       </div>
-
       <form className="form">
         <fieldset className="form-group">
           <label htmlFor="btLevel">Dificuldade</label>

@@ -15,6 +15,7 @@ var timerId = null;
 var tabDim = 0;
 var numWords = 0;
 var timeModifier = 0;
+let players= [];
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
   const [foundWords, setFoundWords] = useState(0);
   const [playerName, setPlayerName] = useState("");
   const [playerScore, setPlayerScore] = useState(0);
+  const [playersBoard, setPlayersBoard] = useState([]);
 
   const handleDragStart = (event) => {
     if(gameStarted){
@@ -118,7 +120,6 @@ function App() {
       console.log(wordsObjects);
       //fillWithRandomLetters(board, tabDim);
       setGameStarted(true);
-      setPlayerScore(0);
     }
   };
 
@@ -177,6 +178,7 @@ function App() {
     setExtraWords([]);
     setFoundWords(0);
     setPlayerScore(0);
+    setPlayerScore(0);
   };
 
   const handleNameChange = (event) => {
@@ -196,6 +198,11 @@ function App() {
       setGameStarted(false);
       words.splice(numWords, words.length);
       setExtraWords([]);
+      playersBoard.push({
+        name: playerName,
+        score: playerScore
+      });
+      setPlayersBoard(playersBoard);
     }
   }, [foundWords]);
 
@@ -241,6 +248,7 @@ function App() {
           onAddWord={addWord}
           playerName={playerName}
           onChangeName={handleNameChange}
+          playerBoard={playersBoard}
         />
         <Board
           selectedLevel={selectedLevel}
