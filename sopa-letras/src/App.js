@@ -134,7 +134,6 @@ function App() {
         found: false
       }
       newWords.push(obj);
-      // add extra words to words list
       setWords([...words, obj]);
       setExtraWords(newWords);
       document.getElementById("inputWord").value = "";
