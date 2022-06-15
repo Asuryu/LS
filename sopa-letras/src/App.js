@@ -14,7 +14,6 @@ var timerId = null;
 var tabDim = 0;
 var numWords = 0;
 var timeModifier = 0;
-let players= [];
 
 
 function App() {
@@ -83,7 +82,7 @@ function App() {
             setPlayerScore(playerScore - losepoints);
           }
           else{
-            setPlayerScore(0);
+            setPlayerScore(10);
           }
         }
       } else {
@@ -109,14 +108,13 @@ function App() {
       setGameStarted(false);
       words.splice(numWords, words.length);
       setExtraWords([]);
-      setPlayerScore(0);
     } else {
+      setPlayerScore(0);
       const wordsObjects = generateWords(numWords);
       wordsObjects.push(...extraWords);
       setWords(wordsObjects);
       words.push(...extraWords);
       placeWordsOnBoard(wordsObjects);
-      console.log(wordsObjects);
       //fillWithRandomLetters(board, tabDim);
       setGameStarted(true);
     }
@@ -176,7 +174,6 @@ function App() {
     setBoard(generateBoard(tabDim));
     setExtraWords([]);
     setFoundWords(0);
-    setPlayerScore(0);
   };
 
   const handleNameChange = (event) => {
@@ -184,7 +181,6 @@ function App() {
     if(inputValue.length > 0 && inputValue.length <= 13){
       setPlayerName(inputValue);
       document.getElementById("inputName").value = "";
-      setPlayerScore(0);
     }
   }
 
@@ -200,9 +196,8 @@ function App() {
         name: playerName,
         score: playerScore
       });
-      setPlayersBoard(playersBoard);
     }
-  }, [foundWords, playersBoard]);
+  }, [foundWords]);
 
   useEffect(() => {
     if (gameStarted) {
@@ -219,7 +214,6 @@ function App() {
           setGameStarted(false);
           words.splice(numWords, words.length);
           setExtraWords([]);
-          setPlayerScore(0);
         }
       }, 1000);
     } else if(timer !== TIMEOUTGAME){

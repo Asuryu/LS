@@ -4,20 +4,23 @@ import "./control-panel.css";
 
 function ControlPanel(props) {
   var scoreboard = props.playersBoard;
+  scoreboard.sort((a, b) => {
+    return b.score - a.score;
+  });
+  scoreboard = scoreboard.slice(0, 3);
+
   return (
     <div id="control-panel">
 
       <div id="scoreboard">
         <h1>Scoreboard</h1>
-        {
-          // Dar sort ao array por ordem de pontuação
-          // Dar slice ao array para mostrar apenas os 3 primeiros
-          scoreboard.map((player, index) => {
-            return (
-              <div className="score" id={"score-" + (index + 1)}><h1>{(index + 1) + ". " + player.name + " (" + player.score + ")"}</h1></div>
-            );
-          })
-        }
+          {
+            scoreboard.map((player, index) => {
+              return (
+                <div className="score" id={"score-" + (index + 1)}><h1>{(index + 1) + ". " + player.name + " (" + player.score + ")"}</h1></div>
+              );
+            })
+          }
       </div>
 
       <div id="controls">
@@ -38,12 +41,6 @@ function ControlPanel(props) {
           </fieldset>
         </form>
       </div>
-      <button
-          type="button"
-          id={props.gameStarted ? "stopBtn" : "startBtn"}
-          disabled={props.selectedLevel === "0"}
-          onClick={props.onGameStart}
-      >{props.gameStarted ? "Parar o jogo" : "Começar o jogo!"}</button>
         
         <div className="extraWords">
         <input id = "inputWord" placeholder="Introduza uma palavra" disabled={props.gameStarted || props.selectedLevel === "0"}></input>
@@ -71,6 +68,15 @@ function ControlPanel(props) {
       <div id="currentScore" style={{display: props.gameStarted ? "block" : "none" }}>
         <h1>Pontuação Atual</h1>
         <div><i className={"fa-solid fa-star"}></i> <span>{props.playerScore}</span></div>
+      </div>
+
+      <div id="btnWrap">
+        <button
+            type="button"
+            id={props.gameStarted ? "stopBtn" : "startBtn"}
+            disabled={props.selectedLevel === "0"}
+            onClick={props.onGameStart}
+        >{props.gameStarted ? "Parar o jogo" : "Começar o jogo!"}</button>
       </div>
 
     </div>

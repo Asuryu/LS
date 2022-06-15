@@ -19,25 +19,32 @@
     left: 30px;
     transform: translate(0%, -50%);
     width: 230px;
-    height: 83vh;
+    height: calc(fit-content + 300px);
     background-color: rgba(47, 47, 47, 0.485);
     border-radius: 10px;
+}
+
+#btnWrap{
+    position: relative;
+    top: 40px;
+    left: 50%;
+    width: calc(100% - 20px);
+    height: 100px;
+    transform: translate(-50%, 0%);
 }
 
 #startBtn{
     transition: 0.1s;
     position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translate(-50%, 0%);
     background-color: #99c72e;
     color: white;
-    width: calc(100% - 20px);
     height: 30px;
     border: none;
     font-weight: bold;
     border-radius: 5px;
+    width: 100%;
     cursor: pointer;
+    top: 20px;
 }
 #startBtn:hover{
     transition: 0.3s;
@@ -53,18 +60,15 @@
 #stopBtn{
     transition: 0.1s;
     position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translate(-50%, 0%);
     background-color: #c72e2e;
     color: white;
-    width: calc(100% - 20px);
-    width: 140px;
     height: 30px;
     border: none;
     font-weight: bold;
     border-radius: 5px;
+    width: 100%;
     cursor: pointer;
+    top: 20px;
 }
 #stopBtn:hover{
     transition: 0.3s;
@@ -156,8 +160,8 @@
 }
 
 #playerName{
-    position: absolute;
-    top: 383px;
+    position: relative;
+    top: 37px;
     left: 50%;
     transform: translate(-50%, 0%);
     text-align: center;
@@ -235,8 +239,8 @@
 }
 
 #currentScore{
-    position: absolute;
-    top: 501px;
+    position: relative;
+    top: 45px;
     left: 50%;
     transform: translate(-50%, 0%);
     text-align: center;
@@ -284,10 +288,11 @@
     background-color: #ff754f;
     width: calc(100% - 20px);
     border-radius: 7px;
+    height: 80px;
 }
 .form-group{
-    position: relative;
-    top: 50px;
+    position: absolute;
+    top: 20px;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -305,10 +310,12 @@
     text-align: center;
     width: 200px;
     height: 30px;
-    position: relative;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, 0%);
     z-index: 10;
     font-size: 0.8em;
-    margin-top: 7px;
 }
 .form-group option {
     background: white;
@@ -324,16 +331,20 @@
     margin-top: 7px;
 }
 .form-group label{
+    position: absolute;
+    top: 0px;
     color: white;
-    padding-top: 10px;
+    padding: 0;
     font-size: 1.2em;
     font-family: NexaBold;
     font-weight: bold;
+    left: 50%;
+    transform: translate(-50%, 0%);
 }
 
 .extraWords{
     position: relative;
-    top: 100px;
+    top: 96px;
     left: 50%;
     width: calc(100% - 20px);
     height: 125px;
