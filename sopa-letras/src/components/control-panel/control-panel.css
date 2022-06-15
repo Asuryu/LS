@@ -19,7 +19,7 @@
     left: 30px;
     transform: translate(0%, -50%);
     width: 230px;
-    height: fit-content;
+    height: 83vh;
     background-color: rgba(47, 47, 47, 0.485);
     border-radius: 10px;
 }

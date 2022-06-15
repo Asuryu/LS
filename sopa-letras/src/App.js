@@ -28,7 +28,7 @@ function App() {
   const [collectedLetters, setCollectedLetters] = useState([]);
   const [totalCollectedLetters, setTotalCollectedLetters] = useState([]);
   const [foundWords, setFoundWords] = useState(0);
-  const [playerName, setPlayerName] = useState("");
+  const [playerName, setPlayerName] = useState("Estranho");
   const [playerScore, setPlayerScore] = useState(0);
   const [playersBoard, setPlayersBoard] = useState([]);
 
@@ -177,7 +177,6 @@ function App() {
     setExtraWords([]);
     setFoundWords(0);
     setPlayerScore(0);
-    setPlayerScore(0);
   };
 
   const handleNameChange = (event) => {
@@ -190,7 +189,7 @@ function App() {
   }
 
   useEffect(() => {
-    if(foundWords === words.length){
+    if(foundWords === words.length && gameStarted){
       setFoundWords(0);
       setCollectedLetters([]);
       setBoard(generateBoard(tabDim));
@@ -203,7 +202,7 @@ function App() {
       });
       setPlayersBoard(playersBoard);
     }
-  }, [foundWords]);
+  }, [foundWords, playersBoard]);
 
   useEffect(() => {
     if (gameStarted) {
@@ -246,8 +245,9 @@ function App() {
           extraWords={extraWords}
           onAddWord={addWord}
           playerName={playerName}
+          playerScore={playerScore}
           onChangeName={handleNameChange}
-          playerBoard={playersBoard}
+          playersBoard={playersBoard}
         />
         <Board
           selectedLevel={selectedLevel}

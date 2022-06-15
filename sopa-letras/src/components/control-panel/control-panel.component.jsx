@@ -3,17 +3,21 @@ import { EXTRA_WORDS } from "../../constants";
 import "./control-panel.css";
 
 function ControlPanel(props) {
+  var scoreboard = props.playersBoard;
   return (
     <div id="control-panel">
 
       <div id="scoreboard">
         <h1>Scoreboard</h1>
-       {props.playersBoard.map((player, index) => {
-          return (
-            <div className="score" id={"score-" + (index + 1)}><h1>{(index + 1) + ". " + player}</h1></div>
-          );
+        {
+          // Dar sort ao array por ordem de pontuação
+          // Dar slice ao array para mostrar apenas os 3 primeiros
+          scoreboard.map((player, index) => {
+            return (
+              <div className="score" id={"score-" + (index + 1)}><h1>{(index + 1) + ". " + player.name + " (" + player.score + ")"}</h1></div>
+            );
+          })
         }
-      )}
       </div>
 
       <div id="controls">
@@ -54,7 +58,7 @@ function ControlPanel(props) {
       </div>
 
       <div id="playerName">
-        <h1>{props.playerName ? props.playerName : "Olá, estranho"}</h1>
+        <h1>{props.playerName ? props.playerName : "Olá, Estranho"}</h1>
         <input id = "inputName" placeholder="Introduza um nome" disabled={props.gameStarted}></input>
         <button 
         type="button"
