@@ -82,7 +82,7 @@ function App() {
             setPlayerScore(playerScore - losepoints);
           }
           else{
-            setPlayerScore(10);
+            setPlayerScore(0);
           }
         }
       } else {
@@ -115,7 +115,7 @@ function App() {
       setWords(wordsObjects);
       words.push(...extraWords);
       placeWordsOnBoard(wordsObjects);
-      //fillWithRandomLetters(board, tabDim);
+      fillWithRandomLetters(board, tabDim);
       setGameStarted(true);
     }
   };
