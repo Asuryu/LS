@@ -3,27 +3,27 @@ import { EXTRA_WORDS } from "../../constants";
 import "./control-panel.css";
 
 function ControlPanel(props) {
-  var scoreboard = props.playersBoard;
-  scoreboard.sort((a, b) => {
-    return b.score - a.score;
+  var scoreboard = props.playersBoard; // scoreboard = tabela de pontuação
+  scoreboard.sort((a, b) => { // ordena a tabela de pontuação
+    return b.score - a.score; // de forma decrescente
   });
-  scoreboard = scoreboard.slice(0, 3);
+  scoreboard = scoreboard.slice(0, 3); // obtém os 3 primeiros jogadores (top 3)
 
   return (
     <div id="control-panel">
 
-      <div id="scoreboard">
+      <div id="scoreboard"> {/* tabela de pontuação */}
         <h1>Scoreboard</h1>
           {
-            scoreboard.map((player, index) => {
-              return (
+            scoreboard.map((player, index) => { // para cada jogador na scoreboard
+              return ( // mostra o nome e o score do jogador
                 <div className="score" id={"score-" + (index + 1)}><h1>{(index + 1) + ". " + player.name + " (" + player.score + ")"}</h1></div>
               );
             })
           }
       </div>
 
-      <div id="controls">
+      <div id="controls"> {/* seleção da dificuldade */}
         <form className="form">
           <fieldset className="form-group">
             <label htmlFor="btLevel">Dificuldade</label>
@@ -42,7 +42,7 @@ function ControlPanel(props) {
         </form>
       </div>
         
-        <div className="extraWords">
+        <div className="extraWords"> {/* palavras extras */}
         <input id = "inputWord" placeholder="Introduza uma palavra" disabled={props.gameStarted || props.selectedLevel === "0"}></input>
         <button 
         type="button"
@@ -54,7 +54,7 @@ function ControlPanel(props) {
         <h2>{Math.abs(EXTRA_WORDS - props.extraWords.length) + " restante(s)"}</h2>
       </div>
 
-      <div id="playerName">
+      <div id="playerName"> {/* escolha do nome do jogador */}
         <h1>{props.playerName ? props.playerName : "Olá, Estranho"}</h1>
         <input id = "inputName" placeholder="Introduza um nome" disabled={props.gameStarted}></input>
         <button 
@@ -65,12 +65,12 @@ function ControlPanel(props) {
         >Definir Nome</button>
       </div>
 
-      <div id="currentScore" style={{display: props.gameStarted ? "block" : "none" }}>
+      <div id="currentScore" style={{display: props.gameStarted ? "block" : "none" }}> {/* pontuação atual */}
         <h1>Pontuação Atual</h1>
         <div><i className={"fa-solid fa-star"}></i> <span>{props.playerScore}</span></div>
       </div>
 
-      <div id="btnWrap">
+      <div id="btnWrap"> {/* botões de iniciar e parar o jogo */}
         <button
             type="button"
             id={props.gameStarted ? "stopBtn" : "startBtn"}
